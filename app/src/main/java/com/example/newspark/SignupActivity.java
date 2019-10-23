@@ -24,9 +24,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignupActivity extends AppCompatActivity {
 
-    private static final String TAG = "SignupActivity";
+    public final static String NAME_KEY = "name";
+    public final static String LASTNAME_KEY = "lastName";
+    public final static String EMAIL_KEY = "email";
+    public final static String BIRTHDATE_KEY = "birthDate";
+    public static final String TAG = "SignUpActivity";
+
+    private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("newspark/usuario");
 
     private EditText editTextName;
     private EditText editTextLastName;
@@ -38,7 +47,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button buttonSignUp;
 
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         editTextName = findViewById(R.id.editTextName);
         editTextLastName = findViewById(R.id.editTextLastName);
@@ -104,56 +114,32 @@ public class SignupActivity extends AppCompatActivity {
                                 } catch (Exception e) {
                                     Toast.makeText(SignupActivity.this,
                                             "Surgió un error al crear su cuenta. Por favor intente nuevamente",
-                                            Toast.LENGTH_LONG);
+                                            Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                User user = new User(
+                                        name,
+                                        lastName,
+                                        email,
+                                        birthDate
+                                );
+
+                                db.collection("newspark").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if(!task.isSuccessful()) {
-                                            try {
-                                                throw task.getException();
-                                            } catch (FirebaseAuthWeakPasswordException weakPassword) {
-                                                editTextPassword.setError("La contraseña es muy débil");
-                                                editTextPassword.requestFocus();
-                                            } catch (FirebaseAuthInvalidCredentialsException badEmail) {
-                                                editTextEmail.setError("El correo no es válido");
-                                                editTextEmail.requestFocus();
-                                            } catch (FirebaseAuthUserCollisionException emailExists) {
-                                                editTextEmail.setError("Ya existe un usuario con este correo");
-                                                editTextEmail.requestFocus();
-                                            } catch (Exception e) {
-                                                Toast.makeText(SignupActivity.this, "Ocurrió un error al crear la cuenta. Inténtalo de nuevo.", Toast.LENGTH_LONG);
-                                            }
-                                        } else {
-                                            User user = new User(
-                                                    name,
-                                                    lastName,
-                                                    email,
-                                                    birthDate,
-                                                    password
-                                            );
-
-                                            db.collection("usuarios")
-                                                    .add(user)
-                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                        @Override
-                                                        public void onSuccess(DocumentReference documentReference) {
-                                                            Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Log.d(TAG, "Error adding document", e);
-                                                        }
-                                                    });
-
-                                            Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
-                                            startActivity(intent);
-                                        }
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d(TAG, "Se agregó un nuevo usuario");
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "No se pudo agregar al nuevo usuario", e);
                                     }
                                 });
+
+                                Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
+                                intent.putExtra("email", email);
+                                intent.putExtra("name", name);
+                                startActivity(intent);
                             }
                         }
                     });

@@ -9,14 +9,12 @@ public class User {
     private String lastName;
     private String email;
     private String birthDate;
-    private String password;
 
-    public User(String name, String lastName, String email, String birthDate, String password) {
+    User(String name, String lastName, String email, String birthDate) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-        this.password = password;
     }
 
     public String getName() {
@@ -49,13 +47,5 @@ public class User {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
