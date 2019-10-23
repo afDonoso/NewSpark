@@ -38,16 +38,14 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/editTextLoginEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:enabled="false"
                     android:fontFamily="@font/lato"
-                    android:hint="@string/Usuario"
-                    android:inputType="textPersonName"
-                    android:text="john.doe" />
+                    android:hint="@string/Email"
+                    android:inputType="textPersonName" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,17 +61,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/editTextLoginPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:editable="false"
                     android:ems="10"
-                    android:enabled="false"
                     android:fontFamily="@font/lato"
                     android:hint="@string/Password"
-                    android:inputType="textPassword"
-                    android:text="123456789" />
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +86,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonSignin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -121,7 +117,7 @@
                 android:textColor="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonSignin" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/farc" />
+                app:srcCompat="@drawable/votaciones" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -48,7 +48,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Partidos de izquierda denuncian ataques contra sus sedes políticas en Bogotá"
+                android:text="Registraduría practicará plan piloto de mesa de votación asistida electrónica en Barranquilla"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@android:color/black" />
 
@@ -60,7 +60,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:progress="90"
+                android:progress="10"
                 android:progressDrawable="@drawable/background_partiality_bar" />
 
             <TextView

@@ -137,8 +137,8 @@ public class SignupActivity extends AppCompatActivity {
                                 });
 
                                 Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
-                                intent.putExtra("email", email);
-                                intent.putExtra("name", name);
+                                intent.putExtra(EMAIL_KEY, email);
+                                intent.putExtra(NAME_KEY, name);
                                 startActivity(intent);
                             }
                         }
