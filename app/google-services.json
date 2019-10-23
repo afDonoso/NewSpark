@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "393348775573",
+    "firebase_url": "https://newspark-91f51.firebaseio.com",
+    "project_id": "newspark-91f51",
+    "storage_bucket": "newspark-91f51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393348775573:android:03b347ec9543eb3670659c",
+        "android_client_info": {
+          "package_name": "com.example.newspark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393348775573-p5o96pj181bm55s9rv26u7jjmtdiiu5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.newspark",
+            "certificate_hash": "09b030d3d6fe16dd78f95b46e80f03e19a17c64b"
+          }
+        },
+        {
+          "client_id": "393348775573-i1n9si6cnpudk10poab2g0n9oimtqfhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYvmaPmVMXRsCjTHyKerv4oLbrIIl7x4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393348775573-i1n9si6cnpudk10poab2g0n9oimtqfhn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

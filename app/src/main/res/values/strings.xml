@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">NewSpark</string>
+    <string name="Welcome">¡Bienvenido a NewSpark!</string>
+    <string name="Usuario">Usuario</string>
+    <string name="Slogan">Trust what you read</string>
+
+    <string name="Login">Ingresar</string>
+    <string name="Signup">Registrarse</string>
+    <string name="User_already">¿Ya eres un usuario?</string>
+    <string name="Forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="No_account">¿No tienes una cuenta?</string>
+
+    <string name="Name">Nombre</string>
+    <string name="Email">Correo</string>
+    <string name="Password">Contraseña</string>
+    <string name="Verify_password">Verificar Contraseña</string>
+    <string name="Birth_date">Fecha de Nacimiento</string>
+    <string name="Last_name">Apellido</string>
+
+    <string name="article_1">Los partidos de izquierda Farc, surgido del histórico proceso de paz, Partido Comunista Colombiano y la Unión Patriótica denunciaron este viernes ataques a sus sedes políticas en Bogotá, en un nuevo caso de violencia previo a los comicios locales de octubre.\n\n
+
+“Sujetos atacaron nuestra sede. Arrancaron carteles de campaña y dejaron un panfleto que dice ‘regresamos’ junto a un martillo”, señaló la Fuerza Alternativa Revolucionaria del Común (Farc) en Twitter.\n\n
+
+Junto al mensaje, unas fotografías ilustran los daños al edificio, donde además puede verse el grafiti de una cruz celta, símbolo usado por neonazis.\n\n
+
+Horas antes, el Partido Comunista Colombiano (PCC), que comparte sede con  la Unión Patriótica (UP), denunció en un comunicado que en la madrugada del viernes “se produjo un atentado con disparos y bomba incendiaria” contra sus oficinas.\n\n
+
+La agresión se suma a una ola de violencia contra candidatos a los comicios del 27 de octubre, donde se elegirán gobernadores, alcaldes, diputados, concejales y ediles.\n\n
+
+ Entre el 1 de enero y el 4 de septiembre la Defensoría del Pueblo registró 15 homicidios y 192 amenazas personas involucrados en campañas electorales.\n\n
+
+Hasta ahora la Policía solo se ha referido a los hechos ocurridos en la sede del PCC y la UP, donde adelanta “una investigación que inició con la verificación de cámaras de video, entrevistas y trabajo de vecindario”, según un comunicado.\n\n
+
+La Defensoría del Pueblo, Naciones Unidas y la Misión de Observación Electoral (MOE) han advertido del tenso contexto que enloda las que serán las segundas elecciones tras el acuerdo de paz.</string>
+</resources>
