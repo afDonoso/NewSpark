@@ -3,6 +3,7 @@ package com.example.newspark;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     private CardView cardViewWelcome;
     private TextView textViewGreetings;
     private ImageView imageViewTimeDay;
+    private ConstraintLayout constraintLayoutCardWelcome;
 
     private String userEmail;
 
@@ -53,7 +55,8 @@ public class HomeActivity extends AppCompatActivity {
 
         userEmail = getIntent().getStringExtra(SignupActivity.EMAIL_KEY);
         textViewGreetings = findViewById(R.id.textViewGreetings);
-        imageViewTimeDay = findViewById(R.id.imageViewTimeDay);
+        //imageViewTimeDay = findViewById(R.id.imageViewTimeDay);
+        constraintLayoutCardWelcome = findViewById(R.id.constraintLayoutCardWelcome);
 
         final Context context = this;
 
@@ -115,16 +118,20 @@ public class HomeActivity extends AppCompatActivity {
 
         if(timeOfDay.equals(TimeOfDay.Morning)) {
             textViewGreetings.setText(GOOD_MORNING + userName + "!");
-            imageViewTimeDay.setImageResource(R.drawable.day);
+            //imageViewTimeDay.setImageResource(R.drawable.day);
+            constraintLayoutCardWelcome.setBackgroundResource(R.drawable.background_greetings_morning);
         } else if(timeOfDay.equals(TimeOfDay.Noon)) {
             textViewGreetings.setText(GOOD_AFTERNOON + userName + "!");
-            imageViewTimeDay.setImageResource(R.drawable.noon);
+            //imageViewTimeDay.setImageResource(R.drawable.noon);
+            constraintLayoutCardWelcome.setBackgroundResource(R.drawable.background_greetings_noon);
         } else if(timeOfDay.equals(TimeOfDay.Afternoon)) {
             textViewGreetings.setText(GOOD_AFTERNOON + userName + "!");
-            imageViewTimeDay.setImageResource(R.drawable.afternoon);
+            //imageViewTimeDay.setImageResource(R.drawable.afternoon);
+            constraintLayoutCardWelcome.setBackgroundResource(R.drawable.background_greetings_afternoon);
         } else if(timeOfDay.equals(TimeOfDay.Night)) {
             textViewGreetings.setText(GOOD_NIGHT + userName + "!");
-            imageViewTimeDay.setImageResource(R.drawable.night);
+            //imageViewTimeDay.setImageResource(R.drawable.night);
+            constraintLayoutCardWelcome.setBackgroundResource(R.drawable.background_greetings_night);
         }
     }
 

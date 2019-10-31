@@ -117,29 +117,38 @@ public class SignupActivity extends AppCompatActivity {
                                             Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                User user = new User(
-                                        name,
-                                        lastName,
-                                        email,
-                                        birthDate
-                                );
-
-                                db.collection("newspark").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                FirebaseUser currentUser = mAuth.getCurrentUser();
+                                currentUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Log.d(TAG, "Se agregó un nuevo usuario");
+                                    public void onSuccess(Void aVoid) {
+                                        User user = new User(
+                                                name,
+                                                lastName,
+                                                email,
+                                                birthDate
+                                        );
+
+                                        db.collection("newspark").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Log.d(TAG, "Se agregó un nuevo usuario");
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "No se pudo agregar al nuevo usuario", e);
+                                            }
+                                        });
+
+                                        Intent intent = new Intent(SignupActivity.this, VerifyEmailActivity.class);
+                                        startActivity(intent);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Log.w(TAG, "No se pudo agregar al nuevo usuario", e);
+                                        Toast.makeText(SignupActivity.this, "No se pudo enviar el correo de verificación.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
-                                Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
-                                intent.putExtra(EMAIL_KEY, email);
-                                intent.putExtra(NAME_KEY, name);
-                                startActivity(intent);
                             }
                         }
                     });
@@ -148,11 +157,6 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    public void onClickRegistrarse(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
     }
 
     public void onClickAlreadyUser(View view) {
