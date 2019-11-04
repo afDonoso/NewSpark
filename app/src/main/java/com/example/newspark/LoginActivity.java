@@ -3,11 +3,15 @@ package com.example.newspark;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextLoginEmail;
     private EditText editTextLoginPassword;
     private Button buttonSignin;
+    private ProgressBar progressBarLogin;
+    private TextView textViewForgotPassword;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -39,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextLoginEmail = findViewById(R.id.editTextLoginEmail);
         editTextLoginPassword = findViewById(R.id.editTextLoginPassword);
+        progressBarLogin = findViewById(R.id.progressBarLogin);
+        textViewForgotPassword = findViewById(R.id.textViewForgotPassword);
 
         buttonSignin = findViewById(R.id.buttonSignin);
         buttonSignin.setOnClickListener(new View.OnClickListener() {
@@ -47,50 +55,63 @@ public class LoginActivity extends AppCompatActivity {
                 final String email = editTextLoginEmail.getText().toString().trim();
                 String password = editTextLoginPassword.getText().toString();
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                Toast.makeText(LoginActivity.this, "¡Ingreso éxitoso!", Toast.LENGTH_SHORT).show();
+                if(email.isEmpty() || password.isEmpty()) {
+                    editTextLoginEmail.requestFocus();
+                    editTextLoginEmail.setError("Llene todos los campos");
+                } else {
+                    buttonSignin.setText("");
+                    progressBarLogin.setVisibility(View.VISIBLE);
 
-                                if(currentUser.isEmailVerified()) {
-                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                    intent.putExtra(SignupActivity.EMAIL_KEY, email);
-                                    startActivity(intent);
-                                } else {
-                                    Intent intent = new Intent(LoginActivity.this, VerifyEmailActivity.class);
-                                    intent.putExtra(SignupActivity.EMAIL_KEY, email);
-                                    startActivity(intent);
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    Toast.makeText(LoginActivity.this, "¡Ingreso éxitoso!", Toast.LENGTH_SHORT).show();
+
+                                    if (currentUser.isEmailVerified()) {
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        intent.putExtra(SignupActivity.EMAIL_KEY, email);
+                                        LoginActivity.this.finish();
+                                        startActivity(intent);
+                                    } else {
+                                        Intent intent = new Intent(LoginActivity.this, VerifyEmailActivity.class);
+                                        intent.putExtra(SignupActivity.EMAIL_KEY, email);
+                                        LoginActivity.this.finish();
+                                        startActivity(intent);
+                                    }
                                 }
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                try {
-                                    throw e;
-                                } catch (FirebaseAuthInvalidUserException invalidUser) {
-                                    editTextLoginEmail.setError("No existe un usuario con este correo.");
-                                    editTextLoginEmail.requestFocus();
-                                } catch (FirebaseAuthInvalidCredentialsException invalidPassword) {
-                                    editTextLoginPassword.setError("La contraseña ingresada no corresponde con la del usuario registrado.");
-                                    editTextLoginPassword.requestFocus();
-                                } catch (Exception e2) {
-                                    Toast.makeText(LoginActivity.this, e2.getMessage(), Toast.LENGTH_LONG).show();
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    try {
+                                        buttonSignin.setText(R.string.Login);
+                                        progressBarLogin.setVisibility(View.GONE);
+                                        throw e;
+                                    } catch (FirebaseAuthInvalidUserException invalidUser) {
+                                        editTextLoginEmail.setError("No existe un usuario con este correo.");
+                                        editTextLoginEmail.requestFocus();
+                                    } catch (FirebaseAuthInvalidCredentialsException invalidPassword) {
+                                        editTextLoginPassword.setError("La contraseña ingresada no corresponde con la del usuario registrado.");
+                                        editTextLoginPassword.requestFocus();
+                                    } catch (Exception e2) {
+                                        Toast.makeText(LoginActivity.this, e2.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
     }
 
-    public void onClickIngresar(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+    public void onClickNoAccount(View view) {
+        Intent intent = new Intent(this, SignupActivity.class);
+        this.finish();
         startActivity(intent);
     }
 
-    public void onClickNoAccount(View view) {
-        Intent intent = new Intent(this, SignupActivity.class);
+    public void onClickForgotPassword(View view) {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 }

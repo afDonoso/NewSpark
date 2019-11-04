@@ -7,4 +7,7 @@
     <color name="colorPrimaryMidLight">#7EE1FF</color>
     <color name="colorPrimaryLight">#94EDFF</color>
     <color name="hint_color">#C8FFFFFF</color>
+
+    <color name="colorRight">#FF99CC00</color>
+    <color name="colorWrong">#FFCC0000</color>
 </resources>

@@ -9,8 +9,10 @@
     <string name="User_already">¿Ya eres un usuario?</string>
     <string name="Forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="No_account">¿No tienes una cuenta?</string>
-    <string name="Verify_email">Verifica tu E-mail para poder acceder a la aplicación.</string>
+    <string name="Verify_email">Por favor verifica tu E-mail e inicia sesión para poder ingresar a la aplicación.</string>
     <string name="Send_again">Enviar correo nuevamente</string>
+    <string name="Instructions_forgot_password">Ingresa el correo electrónico que utilizas para iniciar sesión
+    para poder mandarte los pasos para recuperar tu contraseña.</string>
 
     <string name="Name">Nombre</string>
     <string name="Email">Correo</string>
@@ -18,4 +20,16 @@
     <string name="Verify_password">Verificar Contraseña</string>
     <string name="Birth_date">Fecha de Nacimiento</string>
     <string name="Last_name">Apellido</string>
+    <string name="Recover_password">Recuperar contraseña</string>
+    <string name="Cancel">Cancelar</string>
+
+    <!-- Content Descriptions -->
+    <string name="Image_email">Imagen de un correo</string>
+    <string name="Logo_description">Logo de la aplicación</string>
+
+    <!-- Date Picker -->
+    <string name="titlulo_pickers">Obtener fecha y hora</string>
+
+    <string name="formato_fecha">dd/mm/yyyy</string>
+    <string name="formato_hora">hh:mm</string>
 </resources>

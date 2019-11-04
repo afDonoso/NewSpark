@@ -3,12 +3,17 @@ package com.example.newspark;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +40,16 @@ public class SignupActivity extends AppCompatActivity {
     public final static String EMAIL_KEY = "email";
     public final static String BIRTHDATE_KEY = "birthDate";
     public static final String TAG = "SignUpActivity";
+    private static final String CERO = "0";
+    private static final String BARRA = "/";
+
+    //Calendario para obtener fecha & hora
+    public final Calendar c = Calendar.getInstance();
+
+    //Variables para obtener la fecha
+    final int mes = c.get(Calendar.MONTH);
+    final int dia = c.get(Calendar.DAY_OF_MONTH);
+    final int anio = c.get(Calendar.YEAR);
 
     private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("newspark/usuario");
 
@@ -45,6 +61,10 @@ public class SignupActivity extends AppCompatActivity {
     private EditText editTextVerifyPassword;
 
     private Button buttonSignUp;
+
+    private ImageButton imageButtonDatePicker;
+
+    private ProgressBar progressBarSignup;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -63,6 +83,8 @@ public class SignupActivity extends AppCompatActivity {
         editTextBirthDate = findViewById(R.id.editTextBirthDate);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextVerifyPassword = findViewById(R.id.editTextVerifyPassword);
+        progressBarSignup = findViewById(R.id.progressBarSignup);
+        imageButtonDatePicker = findViewById(R.id.imageButtonDatePicker);
 
         buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
@@ -96,11 +118,16 @@ public class SignupActivity extends AppCompatActivity {
                     editTextVerifyPassword.setError("Las contraseñas no coinciden");
                     editTextVerifyPassword.requestFocus();
                 } else {
+                    progressBarSignup.setVisibility(View.VISIBLE);
+                    buttonSignUp.setText("");
+
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()) {
                                 try {
+                                    buttonSignUp.setText(R.string.Signup);
+                                    progressBarSignup.setVisibility(View.GONE);
                                     throw task.getException();
                                 } catch (FirebaseAuthWeakPasswordException weakPassword) {
                                     editTextPassword.setError("La contraseña es muy débil");
@@ -141,6 +168,7 @@ public class SignupActivity extends AppCompatActivity {
                                         });
 
                                         Intent intent = new Intent(SignupActivity.this, VerifyEmailActivity.class);
+                                        SignupActivity.this.finish();
                                         startActivity(intent);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -161,6 +189,31 @@ public class SignupActivity extends AppCompatActivity {
 
     public void onClickAlreadyUser(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
+        this.finish();
         startActivity(intent);
+    }
+
+    public void onClickImageButtonDatePicker(View view) {
+        DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
+                final int mesActual = month + 1;
+                //Formateo el día obtenido: antepone el 0 si son menores de 10
+                String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                //Formateo el mes obtenido: antepone el 0 si son menores de 10
+                String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
+                //Muestro la fecha con el formato deseado
+                editTextBirthDate.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
+
+
+            }
+            //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
+            /**
+             *También puede cargar los valores que usted desee
+             */
+        },anio, mes, dia);
+        //Muestro el widget
+        recogerFecha.show();
     }
 }
