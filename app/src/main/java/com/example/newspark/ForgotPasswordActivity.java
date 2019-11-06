@@ -42,14 +42,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         textViewForgotPassword = findViewById(R.id.textViewForgotPassword);
         editTextForgotPasswordEmail = findViewById(R.id.editTextForgotPasswordEmail);
-        final String email = editTextForgotPasswordEmail.getText().toString();
-        Log.d("ForgotPasswordActivity", "EMAIL DEL USUARIO: " + email);
         progressBarForgotPassword = findViewById(R.id.progressBarForgotPassword);
 
         buttonRecoverPassword = findViewById(R.id.buttonRecoverPassword);
         buttonRecoverPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String email = editTextForgotPasswordEmail.getText().toString();
+
                 if(email.isEmpty()) {
                     editTextForgotPasswordEmail.setError("Ingrese un correo");
                     editTextForgotPasswordEmail.requestFocus();
@@ -70,17 +70,25 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     textViewForgotPassword.setText(CORREO_ENVIADO);
-                                    textViewForgotPassword.setTextColor(Color.parseColor("#FF99CC00"));
+                                    textViewForgotPassword.setTextColor(Color.parseColor("#FF769D00"));
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     textViewForgotPassword.setText(CORREO_NO_ENVIADO);
-                                    textViewForgotPassword.setTextColor(Color.parseColor("FFCC0000"));
+                                    textViewForgotPassword.setTextColor(Color.parseColor("#FFCC0000"));
                                 }
                             });
                 }
+            }
+        });
+
+        buttonForgotPasswordCancel = findViewById(R.id.buttonForgotPasswordCancel);
+        buttonForgotPasswordCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ForgotPasswordActivity.this.finish();
             }
         });
     }

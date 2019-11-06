@@ -19,13 +19,13 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/background"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMainIngresar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonMainIngresar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -33,15 +33,14 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/background_button"
         android:fontFamily="@font/lato_bold"
-        android:onClick="onClickIngresar"
         android:text="@string/Login"
         android:textColor="@color/background"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMainRegistrarse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonMainRegistrarse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -49,7 +48,6 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/background_button"
         android:fontFamily="@font/lato_bold"
-        android:onClick="onClickRegistrarse"
         android:text="@string/Signup"
         android:textColor="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +61,7 @@
         android:layout_height="300dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:contentDescription="@string/Logo_description"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
