@@ -34,55 +34,62 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageViewArticleDetail"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/votaciones" />
+                android:contentDescription="@string/News_image"
+                android:scaleType="fitXY" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textViewArticleDetailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Registraduría practicará plan piloto de mesa de votación asistida electrónica en Barranquilla"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@android:color/black" />
 
+            <TextView
+                android:id="@+id/textViewArticleDetailAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/lato_italic"
+                android:textSize="16sp" />
+
             <ProgressBar
-                android:id="@+id/progressBar3"
+                android:id="@+id/progressBarArticleDetail"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:progress="10"
                 android:progressDrawable="@drawable/background_partiality_bar" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/textViewArticleDetailBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/lato"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textViewArticleDetailSource"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/lato_italic"
-                android:text="Fuente: El Heraldo" />
+                android:fontFamily="@font/lato_italic" />
 
         </LinearLayout>
     </ScrollView>

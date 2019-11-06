@@ -26,10 +26,71 @@
     <!-- Content Descriptions -->
     <string name="Image_email">Imagen de un correo</string>
     <string name="Logo_description">Logo de la aplicación</string>
+    <string name="News_image">Imagen de la noticia</string>
 
     <!-- Date Picker -->
     <string name="titlulo_pickers">Obtener fecha y hora</string>
 
     <string name="formato_fecha">dd/mm/yyyy</string>
     <string name="formato_hora">hh:mm</string>
+    <string name="Parciality_percentage">Porcentaje de Parcialidad</string>
+
+    <!-- Ejemplos noticias-->
+    <string name="Noticia_1">Tras la polémica por el supuesto ocultamiento de la muerte de siete menores en un bombardeo revelado este martes por el senado Roy Barreras desde el Congreso de la República, el ministro de Defensa, Guillermo Botero se pronunció la mañana de este miércoles y aseguró que la operación  fue legítima y dicha cartera no ha recibido solicitud de información por parte de la Fiscalía sobre posible responsabilidad de miembros de la fuerza pública.\n\n
+
+Asimismo indicó que “no puede un debate político lleno de imprecisiones y partes a medias ser la última palabra en este asunto”.\n\n
+
+Botero se refirió inicialmente al operativo que terminó con la muerte del líder campesino Flower Trompeta, en zona rural de Corinto (Cauca), por parte de miembros del Ejército.\n\n
+
+“Una vez se reporta la muerte del señor Trompeta, se informa a las autoridades de policía judicial competentes para que adelanten todas las diligencias tecnicocientíficas denominadas actos urgentes. El ministerio de Defensa Nacional ha prestado toda la colaboración a las autoridades judiciales para que se adelante investigación que en derecho corresponda”.\n\n
+
+Y agregó que son las autoridades judiciales las competentes para evaluar, “según los resultados de la prueba tecnicocientífica, las circunstancias de ocurrencia de los hechos y la presunta responsabilidad de miembros de la fuerza pública”.\n\n
+
+Mindefensa dijo que la información publicada en medios de comunicación señala que Medicina Legal ha indicado que no hay señales de tortura en el caso del líder campesino, al tiempo que indicó que las investigaciones continúan y el ministerio de Defensa “está atento al resultado de las mismas, las cuales acata y respeta”.\n\n
+
+<b>La muerte de siete menores de edad\n\n</b>
+
+En relación con el bombardeo en el que murió el cabecilla de la disidencia de las Farc, José Marín Ramírez, alias Gildardo o el Cucho, y siete menores de edad, operación llevada a cabo en San Vicente del Caguán, Botero manifestó que todas las operaciones militares están precedidas de una base de planeamiento denominada proceso militar de toma de decisiones.\n\n
+
+Según el mindefensa, dicho proceso está acompañado en todas sus fases por el asesor jurídico operacional, figura de la que dijo se implementó en las Fuerzas Militares desde 2008 por mandato de la política integral de Derechos Humanos y el Derecho Internacional Humanitario del  ministerio de Defensa Nacional.\n\n
+
+“Todos los resultados reportados en el marco de operaciones militares son de conocimiento de la Fiscalía General de la Nación. Una vez se reportan los hechos se procede a revisar los actos urgentes que comprenden las primeras diligencias de levantamiento de cadáver y las necropsias que corresponden a la labor tecnicocientífica que debe orientar las investigaciones. Estos actos urgentes siempre son realizados por funcionarios con atribuciones de policía judicial”.\n\n
+
+“Respecto a este caso, el ministerio de Defensa Nacional no ha recibido a la fecha solicitud de información por parte de la Fiscalía General de la Nación en relación con posible responsabilidad de miembros de la Fuerza Pública, en cualquier caso es directriz de este ministerio prestar permanente colaboración a las autoridades judiciales que lo requieran”, dijo Guillermo Botero.\n\n
+
+Al respecto, el general Luis Fernando Navarro, comandante general de las Fuerzas Militares añadió que “no fue una operación contra menores de edad, fue una operación contra alias Gildardo el Cucho”.\n\n
+
+El alto oficial señaló que durante la operación realizada el pasado 29 de agosto, a las 11 de la noche en la vereda candilejas del municipio de San Vicente del Caguán, “no fue una operación contra menores de edad, fue una operación contra el GAO residual séptimo alias Gildardo Cucho”\n\n
+
+Navarro explicó que el GAO residual es una amenaza real contra el estado colombiano, y en repetidas ocasiones se les ha exigido llevar  cabo operaciones contra esa estructura y que dichos conceptos operacionales están contemplados en los planes operacionales de las Fuerzas Militares, por lo que es deber de ellos y de la Policía nacional contener los planes estratégicos de esas organizaciones armadas al margen de la ley.\n\n
+
+“Estas operaciones se han adelantado partiendo de inteligencia y se pudo establecer que alias Gildardo o Cucho, cabecilla de la estructura séptima del GAO residual inicia un desplazamiento de Venezuela hacia el departamento del Caquetá con su estructura de seguridad compuesta por cerca de 20 individuos, con el propósito de controlar rutas de narcotráfico, realizar acciones terroristas, desplazamientos forzados, secuestro y extorsión”, dijo el general Luis Fernando Navarro.</string>
+
+    <string name="Noticia_2">Avanza el debate de moción de censura en la plenaria del Senado contra el ministro de Defensa, Guillermo Botero, mientras partidos independientes como el Liberal y Cambio Radical, respaldan la salida del funcionario y las colectividades oficialistas piden su renuncia.\n\n
+
+"Urgente, tras los hechos de violencia en Cauca, bancada del Senado del  @PartidoLiberal votaría a favor la moción de censura  del @mindefensa @GuillermoBotero. Decisión en análisis por el expresidente, César Gaviria Trujillo jefe del @PartidoLiberal", escribió en Twitter la colectividad roja.\n\n
+
+A su vez, el senador Juan Diego Gómez, del gobiernistas Partido Conservador, dijo que el ministro debe dar un paso al costado de manera voluntaria, con el fin de que el Gobierno avance en su estrategia de seguridad.\n\n
+
+Entre tanto, el senador citante Roy Barreras, de La U, comenzó su intervención advirtiendo que "el 44% de los colombianos se sienten inseguros, es decir 16 millones de personas. En 2019 hay 178 homicidios más que en 2018".\n\n
+
+Indicó además el disidente del oficialista La U que 127 indígenas han sido asesinados desde agosto de 2018 hasta el 3 de noviembre de 2019, que van 169 reincorporados y 174 líderes sociales asesinados desde la firma de la paz.\n\n
+
+"El fiscal general investiga la presunta responsabilidad en el asesinato de Dimar Torres y dijo que se está indagando qué otra participación pudo existir en relación con los miembros de las Fuerzas Armadas. (...) Volvieron los \'falsos positivos\', asesinaron al campesino Flower Trompeta con cuatro impactos por la espalda", dijo.\n\n
+
+Así mismo, reveló que en un bombardeo en San Vicente del Caguán, Caquetá, los pasados 2 y 3 de septiembre, habrían resultado muertos siete menores de edad, entre ellos una niña de 12 años, y estos registros de Medicina Legal, según Barreras, habrían sido ocultados al público.\n\n
+
+Finalmente, el citante pidió que la votación de esta moción de censura fuese secreta "para salvaguardar la independencia de los senadores".\n\n
+
+Ya en el turno de las bancadas, el senador cordobés Gustavo Petro, de Colombia Humana, señaló: "Aquí no solamente falla una persona sino una política de gobierno. Tenemos una población en el Cauca, acorralada en las cordilleras, sin tierras fértiles y con acaparamiento de tierras".\n\n
+
+Y añadió: "Cuando un gobierno le dice a la ciudadanía que la paz no sirve, lo que está es invitando a las armas".\n\n
+
+Y la senadora Angélica Lozano, de la Alianza Verde, le pidió a Botero: "Retírese del cargo señor ministro, queremos estrenar la moción de censura, pero usted debe retirarse antes".\n\n
+
+La solicitud del debate, acompañada con firmas de 15 congresistas opositores e independientes, fue hecha el pasado 15 de octubre, al término de un debate de control político en la plenaria del Senado. Y en estos momentos, con las cuentas que hacen los citantes, habría 70 votos para que se diera la salida del funcionario.\n\n
+
+Se trata de la cuarta solicitud de moción de censura contra ministros del gobierno de Iván Duque.\n\n
+
+Las tres previas, incluyendo otra contra el propio Botero por el supuesto regreso de los \'falsos positivos\', de la que salió avante, han significado triunfos para los funcionarios cuestionados: el ministro de Hacienda, Alberto Carrasquilla, por los \'Bonos Agua\' y la ministra de Transporte, la barranquillera Ángela María Orozco, por aparentes conflictos de interés en el caso Odebrecht.</string>
 </resources>

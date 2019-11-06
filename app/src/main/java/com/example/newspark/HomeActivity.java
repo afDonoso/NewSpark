@@ -4,14 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
@@ -35,12 +38,11 @@ public class HomeActivity extends AppCompatActivity {
     public final static String GOOD_NIGHT = "¡Buenas noches, ";
     public static final String TAG = "HomeActivity";
 
-    private CardView cardView1;
-    private CardView cardView2;
     private CardView cardViewWelcome;
     private TextView textViewGreetings;
-    private ImageView imageViewTimeDay;
     private ConstraintLayout constraintLayoutCardWelcome;
+    private RecyclerView recyclerViewNews;
+    private NewsAdapter newsAdapter;
 
     private String userEmail;
 
@@ -55,30 +57,9 @@ public class HomeActivity extends AppCompatActivity {
 
         userEmail = getIntent().getStringExtra(SignupActivity.EMAIL_KEY);
         textViewGreetings = findViewById(R.id.textViewGreetings);
-        //imageViewTimeDay = findViewById(R.id.imageViewTimeDay);
         constraintLayoutCardWelcome = findViewById(R.id.constraintLayoutCardWelcome);
 
         final Context context = this;
-
-        String nameTemp = "";
-
-        cardView1 = findViewById(R.id.cardViewNews1);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ArticleDetailActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        cardView2 = findViewById(R.id.cardViewNews2);
-        cardView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ArticleDetail2Activity.class);
-                startActivity(intent);
-            }
-        });
 
         cardViewWelcome = findViewById(R.id.cardViewWelcome);
         cardViewWelcome.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +87,35 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        recyclerViewNews = findViewById(R.id.recyclerViewNews);
+        recyclerViewNews.setLayoutManager(new LinearLayoutManager(this));
+
+        newsAdapter = new NewsAdapter(this, getNews());
+        newsAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, ArticleDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("news", getNews().get(recyclerViewNews.getChildAdapterPosition(view)));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        recyclerViewNews.setAdapter(newsAdapter);
+
+    }
+
+    private ArrayList<News> getNews() {
+        ArrayList<News> newsList = new ArrayList<>();
+
+        newsList.add(new News("Mindefensa no ha recibido solicitud de información por parte de la Fiscalía: Botero",
+                "06 de Novimebre de 2019", R.drawable.mindefensa, "Redacción ElHeraldo.co", 30, R.string.Noticia_1, "ElHeraldo"));
+
+        newsList.add(new News("Sin respaldo se va quedando mindefensa mientras avanza moción de censura",
+                "05 de Noviembre de 2019", R.drawable.mocion_de_censura, "Tomás Betín", 80, R.string.Noticia_2, "ElHeraldo"));
+
+        return newsList;
     }
 
     /**
@@ -117,19 +127,15 @@ public class HomeActivity extends AppCompatActivity {
 
         if(timeOfDay.equals(TimeOfDay.Morning)) {
             textViewGreetings.setText(GOOD_MORNING + userName + "!");
-            //imageViewTimeDay.setImageResource(R.drawable.day);
             constraintLayoutCardWelcome.setBackgroundResource(R.drawable.background_greetings_morning);
         } else if(timeOfDay.equals(TimeOfDay.Noon)) {
             textViewGreetings.setText(GOOD_AFTERNOON + userName + "!");
-            //imageViewTimeDay.setImageResource(R.drawable.noon);
             constraintLayoutCardWelcome.setBackgroundResource(R.drawable.background_greetings_noon);
         } else if(timeOfDay.equals(TimeOfDay.Afternoon)) {
             textViewGreetings.setText(GOOD_AFTERNOON + userName + "!");
-            //imageViewTimeDay.setImageResource(R.drawable.afternoon);
             constraintLayoutCardWelcome.setBackgroundResource(R.drawable.background_greetings_afternoon);
         } else if(timeOfDay.equals(TimeOfDay.Night)) {
             textViewGreetings.setText(GOOD_NIGHT + userName + "!");
-            //imageViewTimeDay.setImageResource(R.drawable.night);
             constraintLayoutCardWelcome.setBackgroundResource(R.drawable.background_greetings_night);
         }
     }

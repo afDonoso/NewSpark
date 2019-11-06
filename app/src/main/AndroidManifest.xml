@@ -12,7 +12,6 @@
         <activity android:name=".ForgotPasswordActivity"></activity>
         <activity android:name=".VerifyEmailActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".ArticleDetail2Activity" />
         <activity android:name=".ArticleDetailActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SignupActivity" />
