@@ -32,7 +32,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
             }
         });
 
-        News news = (News) getIntent().getSerializableExtra("news");
+        /*News news = (News) getIntent().getSerializableExtra("news");
 
         imageViewArticleDetail = findViewById(R.id.imageViewArticleDetail);
         imageViewArticleDetail.setImageResource(news.getImage());
@@ -50,6 +50,6 @@ public class ArticleDetailActivity extends AppCompatActivity {
         textViewArticleDetailAuthor.setText("Autor: " + news.getAuthorName());
 
         progressBarArticleDetail = findViewById(R.id.progressBarArticleDetail);
-        progressBarArticleDetail.setProgress(news.getParcialityPercentage());
+        progressBarArticleDetail.setProgress(news.getParcialityPercentage());*/
     }
 }

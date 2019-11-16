@@ -37,7 +37,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsHolder> implements Vie
 
         holder.textViewTitle.setText(news.getTitle());
         holder.textViewDate.setText(news.getDate());
-        holder.imageViewNews.setImageResource(news.getImage());
+        new DownloadImageTask(holder.imageViewNews).execute(news.getImage());
         holder.progressBarParciality.setProgress(news.getParcialityPercentage());
     }
 
