@@ -102,6 +102,11 @@ public class HomeActivity extends AppCompatActivity {
 
         recyclerViewNews = findViewById(R.id.recyclerViewNews);
         recyclerViewNews.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         newsAdapter = new NewsAdapter(this, getNews());
         newsAdapter.setOnClickListener(new View.OnClickListener() {
@@ -116,55 +121,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         recyclerViewNews.setAdapter(newsAdapter);
-
     }
 
     private ArrayList<News> getNews() {
         String searchTerm = "Colombia Politica";
+
+        newsList.clear();
+
         try {
-            new RetrieveNews().execute(searchTerm);
+            newsList = new RetrieveNews().execute(searchTerm).get();
 
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
-        /*String url = "https://newsapi.org/v2/top-headlines?" +
-                "country=co&" +
-                "apiKey=e5f4f0edca4743ebb3799d983dfb5931";
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    ArrayList<News> temp = new ArrayList<>();
-
-                    JSONArray array = response.getJSONArray("articles");
-                    for(int i = 0; i < array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
-                        String title = object.getString("title");
-                        String imageUrl = object.getString("urlToImage");
-                        String date = object.getString("publishedAt");
-                        int parcialityPercentage = (int) (Math.random() * 100);
-
-                        temp.add(new News(title, date, imageUrl, parcialityPercentage));
-                    }
-                    System.out.println(newsList);
-                    newsList = temp;
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        requestQueue.add(objectRequest);*/
-
-        //newsList.add(new News("Conservadores proponen normalización tributaria en Ley de Financiamiento", "12 de noviembre de 2019", "https://www.elheraldo.co/sites/default/files/styles/width_860/public/articulo/2019/11/12/ley-financiamiento.jpg?itok=NgiyGoxF", 38));
-        //newsList.add(new News("Roy Barreras denuncia amenazas tras moción a exmindefensa", "12 de noviembre de 2019", "https://www.elheraldo.co/sites/default/files/styles/width_860/public/articulo/2019/11/12/dd64a38d-0df3-4597-a3bb-602aecfa12ec.jpg?itok=iJPGuLqp", 85));
 
         return newsList;
     }

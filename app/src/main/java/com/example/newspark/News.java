@@ -25,14 +25,21 @@ public class News implements Serializable {
     private int parcialityPercentage;
 
     /**
+     * Contenido del artículo.
+     */
+    private String contenido;
+
+    /**
      * Crea una nueva noticia con la información ingresada por parámetro.
      * @param title Título de la noticia. title != "" && != null.
+     * @param contenido Contenido del artículo. contenido != "" && != null.
      * @param date Fecha de la noticia. date != null.
      * @param image Imagen de la noticia. image != null && != "".
      * @param parcialityPercentage Porcentaje de parcialidad. parcialityPercentage >= 0 && <= 100.
      */
-    public News(String title, String date, String image, int parcialityPercentage) {
+    public News(String title, String contenido, String date, String image, int parcialityPercentage) {
         this.title = title;
+        this.contenido = contenido;
         this.date = date;
         this.image = image;
         this.parcialityPercentage = parcialityPercentage;
@@ -68,5 +75,13 @@ public class News implements Serializable {
 
     public void setParcialityPercentage(int parcialityPercentage) {
         this.parcialityPercentage = parcialityPercentage;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
 }
