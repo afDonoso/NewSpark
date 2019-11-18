@@ -2,6 +2,7 @@ package com.example.newspark;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -102,41 +105,63 @@ public class HomeActivity extends AppCompatActivity {
 
         recyclerViewNews = findViewById(R.id.recyclerViewNews);
         recyclerViewNews.setLayoutManager(new LinearLayoutManager(this));
-    }
+        recyclerViewNews.getRecycledViewPool().setMaxRecycledViews(0, 0);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        getNews();
 
-        newsAdapter = new NewsAdapter(this, getNews());
+        newsAdapter = new NewsAdapter(this, newsList);
         newsAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, ArticleDetailActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ArticleWebsiteActivity.class);
                 /*Bundle bundle = new Bundle();
                 bundle.putSerializable("news", getNews().get(recyclerViewNews.getChildAdapterPosition(view)));
                 intent.putExtras(bundle);*/
-                //intent.putExtra("url", )
+                intent.putExtra("url", newsList.get(recyclerViewNews.getChildAdapterPosition(view)).getUrl());
                 startActivity(intent);
             }
         });
         recyclerViewNews.setAdapter(newsAdapter);
     }
 
-    private ArrayList<News> getNews() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+
+    private void getNews() {
         String searchTerm = "Colombia Politica";
 
         newsList.clear();
 
         try {
-            newsList = new RetrieveNews().execute(searchTerm).get();
+            JsonArray array = new RetrieveNews().execute(searchTerm).get();
+            //newsList = new RetrieveNewsInformation().execute(array).get();
+
+            for(int i = 0; i < array.size(); i++) {
+                JsonObject object = array.get(i).getAsJsonObject();
+
+                String urlText = object.get("url").toString();
+                String urlRight = urlText.substring(1, urlText.length() - 1);
+                System.out.println(urlRight);
+                String title = object.get("name").getAsString();
+                String url = object.get("url").getAsString();
+                String date = object.get("datePublished").getAsString();
+                Bitmap image = null;
+                if(object.get("image") != null) {
+                    String imageUrl = object.get("image").getAsJsonObject().get("thumbnail").getAsJsonObject().get("contentUrl").getAsString();
+                    image = new DownloadImageTask().execute(imageUrl).get();
+                }
+
+                newsList.add(new News(title, "", url, date, image, (int) (Math.random() * 100)));
+            }
 
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
-        return newsList;
     }
 
     /**

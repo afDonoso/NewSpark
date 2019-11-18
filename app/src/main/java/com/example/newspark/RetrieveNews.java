@@ -5,11 +5,9 @@ import android.os.AsyncTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.json.JSONArray;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -24,10 +22,10 @@ import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class RetrieveNews extends AsyncTask<String, Void, ArrayList<News>> {
+public class RetrieveNews extends AsyncTask<String, Void, JsonArray> {
 
     @Override
-    protected ArrayList<News> doInBackground(String... strings) {
+    protected JsonArray doInBackground(String... strings) {
         ArrayList<News> newsList = new ArrayList<>();
 
         try {
@@ -63,20 +61,12 @@ public class RetrieveNews extends AsyncTask<String, Void, ArrayList<News>> {
             JsonParser parser = new JsonParser();
             JsonObject json = parser.parse(results.jsonResponse).getAsJsonObject();
             JsonArray array = json.getAsJsonArray("value");
-            for(int i = 0; i < array.size(); i++) {
+            /*for(int i = 0; i < array.size(); i++) {
                 JsonObject object = array.get(i).getAsJsonObject();
 
                 String urlText = object.get("url").toString();
                 String urlRight = urlText.substring(1, urlText.length() - 1);
                 System.out.println(urlRight);
-                //System.out.println(urlText.startsWith("https"));
-                /*String urlFormatted = "";
-                if(urlText.startsWith("https")) {
-                    urlFormatted = "http" + urlText.substring(5);
-                    System.out.println(urlFormatted);
-                } else {
-                    urlFormatted = urlText;
-                }*/
 
                 Document doc = Jsoup.connect(urlRight).get();
                 String title = doc.body().getElementsByTag("h1").text();
@@ -87,9 +77,9 @@ public class RetrieveNews extends AsyncTask<String, Void, ArrayList<News>> {
                 String image = object.get("image").getAsJsonObject().get("thumbnail").getAsJsonObject().get("contentUrl").getAsString();
 
                 newsList.add(new News(title, "", date, image, (int) (Math.random() * 100)));
-            }
+            }*/
 
-            return newsList;
+            return array;
         } catch(Exception e) {
             e.printStackTrace();
         }

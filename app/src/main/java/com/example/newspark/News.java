@@ -1,5 +1,7 @@
 package com.example.newspark;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class News implements Serializable {
@@ -17,7 +19,7 @@ public class News implements Serializable {
     /**
      * Imagen de la noticia.
      */
-    private String image;
+    private Bitmap image;
 
     /**
      * Porcentaje de parcialidad;
@@ -30,19 +32,26 @@ public class News implements Serializable {
     private String contenido;
 
     /**
+     * Url del sitio de la noticia.
+     */
+    private String url;
+
+    /**
      * Crea una nueva noticia con la información ingresada por parámetro.
      * @param title Título de la noticia. title != "" && != null.
      * @param contenido Contenido del artículo. contenido != "" && != null.
+     * @param url Url del sitio de la noticia. url != "" && != null.
      * @param date Fecha de la noticia. date != null.
      * @param image Imagen de la noticia. image != null && != "".
      * @param parcialityPercentage Porcentaje de parcialidad. parcialityPercentage >= 0 && <= 100.
      */
-    public News(String title, String contenido, String date, String image, int parcialityPercentage) {
+    public News(String title, String contenido, String url, String date, Bitmap image, int parcialityPercentage) {
         this.title = title;
         this.contenido = contenido;
         this.date = date;
         this.image = image;
         this.parcialityPercentage = parcialityPercentage;
+        this.url = url;
     }
 
     public String getTitle() {
@@ -61,11 +70,11 @@ public class News implements Serializable {
         this.date = date;
     }
 
-    public String getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 
@@ -83,5 +92,13 @@ public class News implements Serializable {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
