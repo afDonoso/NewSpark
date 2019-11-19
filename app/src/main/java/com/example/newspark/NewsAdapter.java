@@ -24,7 +24,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsHolder> implements Vie
     @NonNull
     @Override
     public NewsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_news, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_items_news, null);
 
         view.setOnClickListener(this);
 

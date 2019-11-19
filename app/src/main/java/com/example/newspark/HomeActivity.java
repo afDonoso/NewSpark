@@ -1,6 +1,5 @@
 package com.example.newspark;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,10 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -21,10 +19,10 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,26 +36,20 @@ public class HomeActivity extends AppCompatActivity {
         Night
     }
 
-    public final static String API_KEY = "3c326101fc3e4b2fb726e0ddcca84fbb";
-    public final static String HOST = "https://api.cognitive.microsoft.com";
-    public final static String PATH = "/bing/v7.0/news";
-
     public final static String GOOD_MORNING = "¡Buenos días, ";
     public final static String GOOD_AFTERNOON = "¡Buenas tardes, ";
     public final static String GOOD_NIGHT = "¡Buenas noches, ";
     public static final String TAG = "HomeActivity";
 
-    private CardView cardViewWelcome;
     private TextView textViewGreetings;
     private ConstraintLayout constraintLayoutCardWelcome;
     private RecyclerView recyclerViewNews;
     private NewsAdapter newsAdapter;
+    private BottomNavigationView bottomNavigationView;
 
     private String userEmail;
 
     private FirebaseFirestore db;
-
-    private RequestQueue requestQueue;
 
     private ArrayList<News> newsList;
 
@@ -67,23 +59,11 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         db = FirebaseFirestore.getInstance();
-        requestQueue = Volley.newRequestQueue(this);
         newsList = new ArrayList<>();
 
         userEmail = getIntent().getStringExtra(SignupActivity.EMAIL_KEY);
         textViewGreetings = findViewById(R.id.textViewGreetings);
         constraintLayoutCardWelcome = findViewById(R.id.constraintLayoutCardWelcome);
-
-        final Context context = this;
-
-        cardViewWelcome = findViewById(R.id.cardViewWelcome);
-        cardViewWelcome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-                startActivity(intent);*/
-            }
-        });
 
         db.collection("newspark")
                 .whereEqualTo("email", userEmail)
@@ -106,6 +86,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerViewNews = findViewById(R.id.recyclerViewNews);
         recyclerViewNews.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewNews.getRecycledViewPool().setMaxRecycledViews(0, 0);
+        recyclerViewNews.setHasFixedSize(true);
 
         getNews();
 
@@ -114,14 +95,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, ArticleWebsiteActivity.class);
-                /*Bundle bundle = new Bundle();
-                bundle.putSerializable("news", getNews().get(recyclerViewNews.getChildAdapterPosition(view)));
-                intent.putExtras(bundle);*/
                 intent.putExtra("url", newsList.get(recyclerViewNews.getChildAdapterPosition(view)).getUrl());
                 startActivity(intent);
             }
         });
         recyclerViewNews.setAdapter(newsAdapter);
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.menuItemHome);
     }
 
     @Override
@@ -138,7 +119,6 @@ public class HomeActivity extends AppCompatActivity {
 
         try {
             JsonArray array = new RetrieveNews().execute(searchTerm).get();
-            //newsList = new RetrieveNewsInformation().execute(array).get();
 
             for(int i = 0; i < array.size(); i++) {
                 JsonObject object = array.get(i).getAsJsonObject();
@@ -157,6 +137,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 newsList.add(new News(title, "", url, date, image, (int) (Math.random() * 100)));
             }
+
+            Collections.sort(newsList);
 
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();

@@ -3,8 +3,9 @@ package com.example.newspark;
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
-public class News implements Serializable {
+public class News implements Serializable, Comparable<News> {
 
     /**
      * Título de la noticia.
@@ -100,5 +101,16 @@ public class News implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public int compareTo(News news) {
+        if (news.getDate().compareTo(this.getDate()) > 0) {
+            return 1;
+        } else if (news.getDate().compareTo(this.getDate()) < 0) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

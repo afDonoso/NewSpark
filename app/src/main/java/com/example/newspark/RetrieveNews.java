@@ -24,15 +24,20 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class RetrieveNews extends AsyncTask<String, Void, JsonArray> {
 
+    public final static String API_KEY = "3c326101fc3e4b2fb726e0ddcca84fbb";
+    public final static String HOST = "https://api.cognitive.microsoft.com";
+    public final static String PATH = "/bing/v7.0/news";
+
     @Override
     protected JsonArray doInBackground(String... strings) {
         ArrayList<News> newsList = new ArrayList<>();
 
         try {
             // construct the search request URL (in the form of URL + query string)
-            URL url = new URL(HomeActivity.HOST + HomeActivity.PATH + "?q=" + URLEncoder.encode(strings[0], "UTF-8"));
+            URL url = new URL(HOST + PATH + "?q=" + URLEncoder.encode(strings[0], "UTF-8"));
+            System.out.println("URL: " + url.toString());
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-            connection.setRequestProperty("Ocp-Apim-Subscription-Key", HomeActivity.API_KEY);
+            connection.setRequestProperty("Ocp-Apim-Subscription-Key", API_KEY);
             connection.setConnectTimeout(120000);
             // receive JSON body
             InputStream stream = connection.getInputStream();
@@ -61,23 +66,6 @@ public class RetrieveNews extends AsyncTask<String, Void, JsonArray> {
             JsonParser parser = new JsonParser();
             JsonObject json = parser.parse(results.jsonResponse).getAsJsonObject();
             JsonArray array = json.getAsJsonArray("value");
-            /*for(int i = 0; i < array.size(); i++) {
-                JsonObject object = array.get(i).getAsJsonObject();
-
-                String urlText = object.get("url").toString();
-                String urlRight = urlText.substring(1, urlText.length() - 1);
-                System.out.println(urlRight);
-
-                Document doc = Jsoup.connect(urlRight).get();
-                String title = doc.body().getElementsByTag("h1").text();
-                String date = object.get("datePublished").getAsString();
-                System.out.println(object.get("image"));
-                System.out.println("URL OBJECT: " + object.get("image").getAsJsonObject().get("thumbnail").getAsJsonObject().get("contentUrl"));
-                System.out.println("URL: " + object.get("image").getAsJsonObject().get("thumbnail").getAsJsonObject().get("contentUrl").getAsString());
-                String image = object.get("image").getAsJsonObject().get("thumbnail").getAsJsonObject().get("contentUrl").getAsString();
-
-                newsList.add(new News(title, "", date, image, (int) (Math.random() * 100)));
-            }*/
 
             return array;
         } catch(Exception e) {
