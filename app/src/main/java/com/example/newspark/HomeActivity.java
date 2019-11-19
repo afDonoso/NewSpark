@@ -113,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void getNews() {
-        String searchTerm = "Colombia Politica";
+        String searchTerm = "";
 
         newsList.clear();
 
@@ -134,8 +134,9 @@ public class HomeActivity extends AppCompatActivity {
                     String imageUrl = object.get("image").getAsJsonObject().get("thumbnail").getAsJsonObject().get("contentUrl").getAsString();
                     image = new DownloadImageTask().execute(imageUrl).get();
                 }
+                int parcialityPercentage = new CalculateParcialityPercentage().execute(url).get();
 
-                newsList.add(new News(title, "", url, date, image, (int) (Math.random() * 100)));
+                newsList.add(new News(title, "", url, date, image, parcialityPercentage));
             }
 
             Collections.sort(newsList);

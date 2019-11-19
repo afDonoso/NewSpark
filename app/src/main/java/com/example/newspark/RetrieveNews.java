@@ -34,8 +34,7 @@ public class RetrieveNews extends AsyncTask<String, Void, JsonArray> {
 
         try {
             // construct the search request URL (in the form of URL + query string)
-            URL url = new URL(HOST + PATH + "?q=" + URLEncoder.encode(strings[0], "UTF-8"));
-            System.out.println("URL: " + url.toString());
+            URL url = new URL(HOST + PATH + "?q=" + URLEncoder.encode(strings[0], "UTF-8") + "&mkt=en-US&category=Politics");
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestProperty("Ocp-Apim-Subscription-Key", API_KEY);
             connection.setConnectTimeout(120000);
